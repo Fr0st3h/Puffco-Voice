@@ -23,8 +23,8 @@ Step 5:
 Commands:
   1. Alexa, tell my puffco to connect - This will connect to your puffco, only need to run it once.
   2. Alexa, tell my puffco to preheat - preheats the current profile and tells you info about it (name, temp,time)
-  3. Alexa, tell my puffco to preheat profile <number> - this preheats the profile you choose (1-4)
-  4. Alexa, tell my puffco to preheat to <temperature> for <seconds> - This will change the current profile's settings so the settings you change works when preheating, 
+  3. Alexa, tell my puffco to preheat profile (1-4) - this preheats the profile you choose
+  4. Alexa, tell my puffco to preheat to (temperature) for (seconds) - This will change the current profile's settings so the settings you change works when preheating, 
 
 
   
