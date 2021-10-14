@@ -18,6 +18,9 @@ Step 3:
 Step 4:
   Start up an ngrok webserver so Alexa can pass commands to your webserver. The webserver is what controls the puffco. You can get ngrok at https://ngrok.com/ and can start an http server by using the following command: ngrok http 8080. This will give you a url like the following http://18f0-xx-xx-xx-xx.ngrok.io. Copy this URL and put it in the Alexa skill under the 'Code' tab. You will want to replace the pre existing URL in the Alexa skill where url = "" is
   
+Step 5:
+  Under the build tab, click Invocation name and change the 'change me' to 'my puffco'
+
 Step 5: 
   Enable the dev skill in your alexa app on the phone and enjoy! 
   
