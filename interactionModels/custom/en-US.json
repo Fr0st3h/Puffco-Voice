@@ -1,0 +1,120 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "my puffco",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "ConnectionIntent",
+          "slots": [],
+          "samples": [
+            "connect"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "DabsIntent",
+          "slots": [
+            {
+              "name": "command",
+              "type": "command"
+            }
+          ],
+          "samples": [
+            "get amount of {command}",
+            "how many {command} have i taken"
+          ]
+        },
+        {
+          "name": "PreheatIntent",
+          "slots": [
+            {
+              "name": "temperature",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "seconds",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "number",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "preheat",
+            "to preheat profile {number}",
+            "to preheat to {temperature} for {seconds} seconds",
+            "to preheat"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "colour"
+              }
+            },
+            {
+              "name": {
+                "value": "color"
+              }
+            },
+            {
+              "name": {
+                "value": "profile"
+              }
+            },
+            {
+              "name": {
+                "value": "preheat"
+              }
+            }
+          ],
+          "name": "command"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "blue"
+              }
+            },
+            {
+              "name": {
+                "value": "green"
+              }
+            },
+            {
+              "name": {
+                "value": "red"
+              }
+            }
+          ],
+          "name": "value"
+        }
+      ]
+    }
+  },
+  "version": "23"
+}
