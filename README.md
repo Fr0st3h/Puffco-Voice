@@ -21,7 +21,7 @@ Step 4:
 Step 5:
   Under the build tab, click Invocation name and change the 'change me' to 'my puffco'. After that save the model and build it
 
-Step 5: 
+Step 6: 
   Enable the dev skill in your alexa app on the phone and enjoy! 
   
 Commands:
