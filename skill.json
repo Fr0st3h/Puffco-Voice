@@ -3,22 +3,22 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "summary": "A test puffco voice command skill",
+          "summary": "A puffco voice command skill",
           "examplePhrases": [
-            "Alexa open test skill",
+            "Alexa run my puffco",
             "preheat"
           ],
           "keywords": [
-            "puffco",
-            "voice"
+            "my",
+            "puffco"
           ],
           "name": "Puffco Voice",
-          "description": "A sample voice command skill for puffco",
+          "description": "A voice skill for puffco peak pro",
           "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
           "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
         },
         "en-CA": {
-          "summary": "A test puffco voice command skill",
+          "summary": "A puffco voice command skill",
           "examplePhrases": [
             "Alexa open test skill",
             "preheat"
