@@ -12,7 +12,7 @@ import requests
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-url = "http://18f0-96-51-169-147.ngrok.io"
+url = "http://18f0-xx-xx-xx-xx.ngrok.io"
 
 def sendPreheatCommand(temperature, seconds):
     req = requests.get(url+"/preheat?temperature="+temperature+"&seconds="+seconds)
