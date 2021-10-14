@@ -4,7 +4,7 @@ from bleak import BleakClient
 from flask import request
 import struct
 
-address = "39DE890F-9C69-4355-92FC-FEEA4660A471"
+address = "AA:BB:CC:DD:EE:FF"#Change this to your puffco bluetooth address
 COMMAND = "F9A98C15-C651-4F34-B656-D100BF580040"
 
 DEVICE_NAME = "F9A98C15-C651-4F34-B656-D100BF58004D"
