@@ -4,6 +4,7 @@ Requirements:
   - Puffco Peak Pro
   - an Alexa device
   - a Mac
+  - Python3 (bleak, aioflask)
 
 Step 1:
   Download everything included (alexa skill & python program).
