@@ -1,4 +1,4 @@
-# Puffco-Voice - An alexa voice skill & python program to control a puffco peak pro.
+# Puffco-Voice - An alexa voice skill & python program to control a puffco peak pro. v0.2
 
 Requirements:
   - Puffco Peak Pro
@@ -24,11 +24,20 @@ Step 5:
 Step 6: 
   Enable the dev skill in your alexa app on the phone and enjoy! 
   
+ 
+Whats new in 0.2:
+ - Lantern mode (on/off)
+ - Party mode (on/off)
+ - Stealth mode (on/off)
+  
 Commands:
   1. Alexa, tell my puffco to connect - This will connect to your puffco, only need to run it once.
   2. Alexa, tell my puffco to preheat - preheats the current profile and tells you info about it (name, temp,time)
   3. Alexa, tell my puffco to preheat profile (1-4) - this preheats the profile you choose
   4. Alexa, tell my puffco to preheat to (temperature) for (seconds) - This will change the current profile's settings so the settings you change works when preheating, 
+  5. Alexa, tell my puffco to [enable/turn on] / [disable/turn off] lantern mode - This will turn on/off lantern mode
+  6. Alexa, tell my puffco to [enable/turn on] / [disable/turn off] party mode - This will turn on/off party mode
+  7. Alexa, tell my puffco to [enable/turn on] / [disable/turn off] stealth mode - This will turn on/off stealth mode
 
 
   
