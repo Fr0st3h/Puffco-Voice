@@ -65,6 +65,23 @@
             "to preheat to {temperature} for {seconds} seconds",
             "to preheat"
           ]
+        },
+        {
+          "name": "ModeSettingIntent",
+          "slots": [
+            {
+              "name": "type",
+              "type": "ModeType"
+            },
+            {
+              "name": "status",
+              "type": "ModeStatus"
+            }
+          ],
+          "samples": [
+            "turn {status} {type} mode",
+            "{status} {type} mode"
+          ]
         }
       ],
       "types": [
@@ -112,9 +129,54 @@
             }
           ],
           "name": "value"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "party"
+              }
+            },
+            {
+              "name": {
+                "value": "stealth"
+              }
+            },
+            {
+              "name": {
+                "value": "lantern"
+              }
+            }
+          ],
+          "name": "ModeType"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "disable"
+              }
+            },
+            {
+              "name": {
+                "value": "off"
+              }
+            },
+            {
+              "name": {
+                "value": "on"
+              }
+            },
+            {
+              "name": {
+                "value": "enable"
+              }
+            }
+          ],
+          "name": "ModeStatus"
         }
       ]
     }
   },
-  "version": "23"
+  "version": "26"
 }

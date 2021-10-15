@@ -12,7 +12,7 @@ import requests
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-url = "http://18f0-xx-xx-xx-xx.ngrok.io"
+url = "NGROK.io SERVER HERE"
 
 def sendPreheatCommand(temperature, seconds):
     req = requests.get(url+"/preheat?temperature="+temperature+"&seconds="+seconds)
@@ -20,6 +20,10 @@ def sendPreheatCommand(temperature, seconds):
 
 def sendCommand(command, profile):
     req = requests.get(url+"/cmd?command="+command+"&profile="+profile)
+    return req.text
+
+def sendModeCommand(type, status):
+    req = requests.get(url+"/mode?type="+type+"&status="+status)
     return req.text
 
 def sendConnectionRequest():
@@ -54,6 +58,21 @@ class ConnectionIntentHandler(AbstractRequestHandler):
             speak_output = sendConnectionRequest()
         except:
             speak_output = "Failed to connect to puffco. You are now ready to use puffco voice"
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                .response
+        )
+
+class ModeSettingntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("ModeSettingIntent")(handler_input)
+
+    def handle(self, handler_input):
+        mode = ask_utils.request_util.get_slot(handler_input, "type")
+        status = ask_utils.request_util.get_slot(handler_input, "status")
+        speak_output = sendModeCommand(mode.value, status.value)
 
         return (
             handler_input.response_builder
@@ -170,6 +189,7 @@ sb = SkillBuilder()
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(ConnectionIntentHandler())
 sb.add_request_handler(PreheatIntentHandler())
+sb.add_request_handler(ModeSettingntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(FallbackIntentHandler())

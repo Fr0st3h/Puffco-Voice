@@ -4,10 +4,15 @@ from bleak import BleakClient
 from flask import request
 import struct
 
-address = "AA:BB:CC:DD:EE:FF"#Change this to your puffco bluetooth address
+address = "PUFFCO MAC ADDRESS HERE"
 COMMAND = "F9A98C15-C651-4F34-B656-D100BF580040"
 
 DEVICE_NAME = "F9A98C15-C651-4F34-B656-D100BF58004D"
+
+LANTERN_STATUS = "F9A98C15-C651-4F34-B656-D100BF58004A"
+LANTERN_COLOUR = "F9A98C15-C651-4F34-B656-D100BF580048"
+
+STEALTH_STATUS = "F9A98C15-C651-4F34-B656-D100BF580042"
 
 PROFILE_CURRENT = "F9A98C15-C651-4F34-B656-D100BF580041"
 PROFILE = "F9A98C15-C651-4F34-B656-D100BF580061"
@@ -84,6 +89,66 @@ async def getDeviceName():
 
 async def sendCommand(client, commandArray):
     await client.write_gatt_char(COMMAND, commandArray)
+
+async def sendLanternColour(client, colour):
+    await client.write_gatt_char(LANTERN_COLOUR, colour)
+
+async def sendLanternStatus(client, status):
+    if(status == 0):
+        commandArray = bytearray([0, 0, 0, 0])
+    elif(status == 1):
+        commandArray = bytearray([1, 0, 0, 0])
+    await client.write_gatt_char(LANTERN_STATUS, commandArray)
+
+async def sendStealthStatus(client, status):
+    if(status == 0):
+        commandArray = bytearray([0, 0, 0, 0])
+    elif(status == 1):
+        commandArray = bytearray([1, 0, 0, 0])
+    await client.write_gatt_char(STEALTH_STATUS, commandArray)
+
+modes = list(["lantern", "party", "stealth"])
+statusList = list(["on", "enable", "off", "disable"])
+
+@app.route('/mode', methods=['GET'])
+async def handle_mode():
+    mode = request.args.get('type','')
+    status = request.args.get('status','')
+    statusInList = False
+    modeInList = False
+    if(status in statusList):
+        statusInList = True
+    if(mode in modes):
+        modeInList = True
+    if(mode == "lantern"):
+        if(status == "on" or status == "enable"):
+            await sendLanternStatus(client, 1)
+            return "Lantern was turned on for {}".format(await getDeviceName())
+        elif(status == "off" or status == "disable"):
+            await sendLanternStatus(client, 0)
+            return "Lantern was turned off for {}".format(await getDeviceName())
+    elif(mode == "party"):
+        if(status == "on"):
+            colour = bytearray([255,255,0,1,1,0,0,0])
+            await sendLanternStatus(client, 1)
+            await sendLanternColour(client, colour)
+            return "Party mode was turned on for {}".format(await getDeviceName())
+        elif(status == "off"):
+            colour = bytearray([255,0,0,0,1,0,0,0])
+            await sendLanternStatus(client, 0)
+            await sendLanternColour(client, colour)
+            return "Party mode was turned off for {}".format(await getDeviceName())
+    elif(mode == "stealth"):
+        if(status == "on"):
+            await sendStealthStatus(client, 1)
+            return "Stealth was turned on for {}".format(await getDeviceName())
+        elif(status == "off"):
+            await sendStealthStatus(client, 0)
+            return "Stealth was turned off for {}".format(await getDeviceName())
+    if(not modeInList):
+        return "The Mode " + mode + " was not found.", 400
+    if(not statusInList):
+        return "The status " + status + " was not found.", 400
 
 @app.route('/preheat', methods=['GET'])
 async def handle_preheat():
