@@ -88,7 +88,7 @@ async def getDeviceName():
     return name.decode()
 
 async def sendCommand(client, commandArray):
-    await client.write_gatt_char(COMMAND, commandArray)
+    await client.write_gatt_char(COMMAND, commandArray, response=True)
 
 async def sendLanternColour(client, colour):
     await client.write_gatt_char(LANTERN_COLOUR, colour)
@@ -191,7 +191,8 @@ async def handle_cmd():
 @app.route('/')
 async def index():
     try:
-        await asyncio.wait_for(client.connect(), timeout=7.5)
+        await client.connect(timeout=7.5)
+        await client.pair()
         print(f"Connected: {client.is_connected}\n")
         return f"Connected to {await getDeviceName()}", 200
     except asyncio.TimeoutError:
