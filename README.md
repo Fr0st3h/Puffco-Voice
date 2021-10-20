@@ -25,19 +25,22 @@ Step 6:
   Enable the dev skill in your alexa app on the phone and enjoy! 
   
  
-Whats new in 0.2:
- - Lantern mode (on/off)
- - Party mode (on/off)
- - Stealth mode (on/off)
+Whats new in 0.4:
+ - Dab count (Daily, Total, Remaining)
+ - Lantern colour
   
 Commands:
   1. Alexa, tell my puffco to connect - This will connect to your puffco, only need to run it once.
-  2. Alexa, tell my puffco to preheat - preheats the current profile and tells you info about it (name, temp,time)
-  3. Alexa, tell my puffco to preheat profile (1-4) - this preheats the profile you choose
-  4. Alexa, tell my puffco to preheat to (temperature) for (seconds) - This will change the current profile's settings so the settings you change works when preheating, 
-  5. Alexa, tell my puffco to [enable/turn on] / [disable/turn off] lantern mode - This will turn on/off lantern mode
-  6. Alexa, tell my puffco to [enable/turn on] / [disable/turn off] party mode - This will turn on/off party mode
-  7. Alexa, tell my puffco to [enable/turn on] / [disable/turn off] stealth mode - This will turn on/off stealth mode
+  2. Alexa, tell my puffco to preheat - preheats the current profile and tells you info about it (name, temp, time).
+  3. Alexa, tell my puffco to preheat profile (1-4) - this preheats the profile you choose.
+  4. Alexa, tell my puffco to preheat to (temperature) for (seconds) - This will change the current profile's settings so the settings you change works when preheating.
+  5. Alexa, tell my puffco to [enable/turn on] / [disable/turn off] lantern mode - This will turn on/off lantern mode.
+  6. Alexa, tell my puffco to [enable/turn on] / [disable/turn off] party mode - This will turn on/off party mode.
+  7. Alexa, tell my puffco to [enable/turn on] / [disable/turn off] stealth mode - This will turn on/off stealth mode.
+  8. Alexa, ask my puffco how many dabs I've taken in total - This will tell you how many dabs you've taken in total.
+  9. Alexa, ask my puffco how many dabs I take daily - This will tell you your daily dab count.
+  10. Alexa, ask my puffco how many dabs remaining - This will tell you roughly how many dabs left before the battery dies.
+  11. Alexa, tell my puffco to set lantern colour to (colour) - This will set lantern colour to specified colour.
 
 
   
