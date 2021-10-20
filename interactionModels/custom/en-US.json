@@ -31,16 +31,16 @@
           "samples": []
         },
         {
-          "name": "DabsIntent",
+          "name": "PuffcoInfoIntent",
           "slots": [
             {
-              "name": "command",
-              "type": "command"
+              "name": "length",
+              "type": "length"
             }
           ],
           "samples": [
-            "get amount of {command}",
-            "how many {command} have i taken"
+            "how many dabs I have {length}",
+            "how many dabs I have taken {length}"
           ]
         },
         {
@@ -76,9 +76,15 @@
             {
               "name": "status",
               "type": "ModeStatus"
+            },
+            {
+              "name": "color",
+              "type": "AMAZON.Color"
             }
           ],
           "samples": [
+            "set {type} to {color}",
+            "set {type} color to {color}",
             "turn {status} {type} mode",
             "{status} {type} mode"
           ]
@@ -174,9 +180,29 @@
             }
           ],
           "name": "ModeStatus"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "left"
+              }
+            },
+            {
+              "name": {
+                "value": "total"
+              }
+            },
+            {
+              "name": {
+                "value": "daily"
+              }
+            }
+          ],
+          "name": "length"
         }
       ]
     }
   },
-  "version": "26"
+  "version": "29"
 }

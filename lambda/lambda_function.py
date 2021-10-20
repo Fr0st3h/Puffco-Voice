@@ -12,7 +12,7 @@ import requests
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-url = "NGROK.io SERVER HERE"
+url = "NGROK URL HERE"
 
 def sendPreheatCommand(temperature, seconds):
     req = requests.get(url+"/preheat?temperature="+temperature+"&seconds="+seconds)
@@ -24,6 +24,14 @@ def sendCommand(command, profile):
 
 def sendModeCommand(type, status):
     req = requests.get(url+"/mode?type="+type+"&status="+status)
+    return req.text
+
+def sendModeColorCommand(type, color):
+    req = requests.get(url+"/mode?type="+type+"&color="+color)
+    return req.text
+
+def sendInfoCommand(length):
+    req = requests.get(url+"/info?length="+length)
     return req.text
 
 def sendConnectionRequest():
@@ -72,7 +80,11 @@ class ModeSettingntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         mode = ask_utils.request_util.get_slot(handler_input, "type")
         status = ask_utils.request_util.get_slot(handler_input, "status")
-        speak_output = sendModeCommand(mode.value, status.value)
+        color = ask_utils.request_util.get_slot(handler_input, "color")
+        if(not color.value):
+            speak_output = sendModeCommand(mode.value, status.value)
+        else:
+            speak_output = sendModeColorCommand(mode.value, color.value)
 
         return (
             handler_input.response_builder
@@ -106,6 +118,28 @@ class PreheatIntentHandler(AbstractRequestHandler):
                 .response
         )
 
+
+class PuffcoInfoIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("PuffcoInfoIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        length = ask_utils.request_util.get_slot(handler_input, "length")
+        speak_output = sendInfoCommand(length.value)
+        
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                .response
+        )
+
+
+
+
+#Default Amazon Handlers
 class HelpIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
@@ -189,6 +223,7 @@ sb = SkillBuilder()
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(ConnectionIntentHandler())
 sb.add_request_handler(PreheatIntentHandler())
+sb.add_request_handler(PuffcoInfoIntentHandler())
 sb.add_request_handler(ModeSettingntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
