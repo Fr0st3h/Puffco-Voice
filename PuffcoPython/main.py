@@ -4,7 +4,7 @@ from flask import request
 import asyncio
 from matplotlib import colors
 
-mac = "39DE890F-9C69-4355-92FC-FEEA4660A471"
+mac = "PUFFCO MAC ADDRESS HERE"
 
 loop = asyncio.get_event_loop()
 app = Flask(__name__)
