@@ -70,20 +70,20 @@ class Puffco():
                 profile = bytearray([0, 0, 0, 64])
             elif(prof == 3):
                 profile = bytearray([0, 0, 64, 64])
-            await self.client.write_gatt_char(self.PROFILE_CURRENT, profile)
+            await self.client.write_gatt_char(self.PROFILE_CURRENT, profile, response=True)
 
     async def setProfileTime(self, seconds):
         time = Utils.packInt(int(seconds))
         print(time)
-        await self.client.write_gatt_char(self.PROFILE_PREHEAT_TIME, time)
+        await self.client.write_gatt_char(self.PROFILE_PREHEAT_TIME, time, response=True)
 
     async def setProfileTemp(self, temp):
         temperature = Utils.packInt(int(temp))
         print(temperature)
-        await self.client.write_gatt_char(self.PROFILE_PREHEAT_TEMP, temperature)
+        await self.client.write_gatt_char(self.PROFILE_PREHEAT_TEMP, temperature, response=True)
 
     async def sendCommand(self, commandArray):
-        await self.client.write_gatt_char(self.COMMAND, commandArray)
+        await self.client.write_gatt_char(self.COMMAND, commandArray, response=True)
 
     async def getBirthday(self):
         birthday = await self.client.read_gatt_char(self.DEVICE_BIRTHDAY)
@@ -96,7 +96,7 @@ class Puffco():
             commandArray = bytearray([0, 0, 0, 0])
         elif(status == 1):
             commandArray = bytearray([1, 0, 0, 0])
-        await self.client.write_gatt_char(self.STEALTH_STATUS, commandArray)
+        await self.client.write_gatt_char(self.STEALTH_STATUS, commandArray, response=True)
 
     async def getTotalDabsTaken(self):
         totalDabs = await self.client.read_gatt_char(self.TOTAL_DABS)
@@ -129,7 +129,7 @@ class Puffco():
             commandArray = bytearray([0, 0, 0, 0])
         elif(status == 1):
             commandArray = bytearray([1, 0, 0, 0])
-        await self.client.write_gatt_char(self.LANTERN_STATUS, commandArray)
+        await self.client.write_gatt_char(self.LANTERN_STATUS, commandArray, response=True)
 
     async def sendLanternColour(self, colour):
-        await self.client.write_gatt_char(self.LANTERN_COLOUR, colour)
+        await self.client.write_gatt_char(self.LANTERN_COLOUR, colour, response=True)

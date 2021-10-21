@@ -4,7 +4,7 @@ from flask import request
 import asyncio
 from matplotlib import colors
 
-mac = "PUFFCO MAC ADDRESS HERE"
+mac = "PUFFCO MAC ADDRESS"
 
 loop = asyncio.get_event_loop()
 app = Flask(__name__)
@@ -120,6 +120,7 @@ async def index():
         await asyncio.wait_for(Device.connect(), timeout=7.5)
         clickButton = bytearray([0, 0, 64, 64])
         await Device.sendCommand(clickButton)
+        print(f"Connected to puffco named {await Device.getName()}")
         return f"Connected to {await Device.getName()}", 200
     except asyncio.TimeoutError:
         return f"Failed to connect to puffco", 400
