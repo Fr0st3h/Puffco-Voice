@@ -1,4 +1,4 @@
-# Puffco-Voice - An alexa voice skill & python program to control a puffco peak pro. v0.2
+# Puffco-Voice - An alexa voice skill & python program to control a puffco peak pro. v0.5
 
 Requirements:
   - Puffco Peak Pro
@@ -25,9 +25,10 @@ Step 6:
   Enable the dev skill in your alexa app on the phone and enjoy! 
   
  
-Whats new in 0.4:
- - Dab count (Daily, Total, Remaining)
- - Lantern colour
+Whats new in 0.5:
+ - battery level
+ - boost
+ - cancel preheat
   
 Commands:
   1. Alexa, tell my puffco to connect - This will connect to your puffco, only need to run it once.
@@ -41,6 +42,9 @@ Commands:
   9. Alexa, ask my puffco how many dabs I take daily - This will tell you your daily dab count.
   10. Alexa, ask my puffco how many dabs remaining - This will tell you roughly how many dabs left before the battery dies.
   11. Alexa, tell my puffco to set lantern colour to (colour) - This will set lantern colour to specified colour.
+  12. Alexa, ask my puffco how much battery is left - This will tell you how much battery percent is left (and flash the battery level on the puffco)
+  13. Alexa, tell my puffco to boost - This will boost if theres currently a cycle active
+  14. Alexa, tell my puffco to cancel/stop preheat - This will stop a preheat cycle if active.
 
 
   
