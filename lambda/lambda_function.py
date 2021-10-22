@@ -30,8 +30,8 @@ def sendModeColorCommand(type, color):
     req = requests.get(url+"/mode?type="+type+"&color="+color)
     return req.text
 
-def sendInfoCommand(length):
-    req = requests.get(url+"/info?length="+length)
+def sendInfoCommand(type, length):
+    req = requests.get(url+"/info?type="+type+"&length="+length)
     return req.text
 
 def sendConnectionRequest():
@@ -92,6 +92,23 @@ class ModeSettingntentHandler(AbstractRequestHandler):
                 .response
         )
 
+class DuringPreheatIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("DuringPreheatIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        action = ask_utils.request_util.get_slot(handler_input, "action")
+        speak_output = sendCommand(action.value, "")
+        
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                .response
+        )
+
 
 class PreheatIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
@@ -127,7 +144,11 @@ class PuffcoInfoIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         length = ask_utils.request_util.get_slot(handler_input, "length")
-        speak_output = sendInfoCommand(length.value)
+        type = ask_utils.request_util.get_slot(handler_input, "infotype")
+        if(length.value):
+            speak_output = sendInfoCommand(type.value, length.value)
+        else:
+            speak_output = sendInfoCommand(type.value, "")
         
 
         return (
@@ -222,6 +243,7 @@ sb = SkillBuilder()
 
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(ConnectionIntentHandler())
+sb.add_request_handler(DuringPreheatIntentHandler())
 sb.add_request_handler(PreheatIntentHandler())
 sb.add_request_handler(PuffcoInfoIntentHandler())
 sb.add_request_handler(ModeSettingntentHandler())

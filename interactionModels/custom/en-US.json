@@ -36,11 +36,17 @@
             {
               "name": "length",
               "type": "length"
+            },
+            {
+              "name": "infotype",
+              "type": "InfoType"
             }
           ],
           "samples": [
-            "how many dabs I have {length}",
-            "how many dabs I have taken {length}"
+            "how much {infotype} is left",
+            "how much {infotype} is remaining",
+            "how many {infotype} I have {length}",
+            "how many {infotype} I have taken {length}"
           ]
         },
         {
@@ -87,6 +93,19 @@
             "set {type} color to {color}",
             "turn {status} {type} mode",
             "{status} {type} mode"
+          ]
+        },
+        {
+          "name": "DuringPreheatIntent",
+          "slots": [
+            {
+              "name": "action",
+              "type": "action"
+            }
+          ],
+          "samples": [
+            "to {action} preheat",
+            "to {action}"
           ]
         }
       ],
@@ -200,9 +219,44 @@
             }
           ],
           "name": "length"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "battery"
+              }
+            },
+            {
+              "name": {
+                "value": "dabs"
+              }
+            }
+          ],
+          "name": "InfoType"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "stop"
+              }
+            },
+            {
+              "name": {
+                "value": "cancel"
+              }
+            },
+            {
+              "name": {
+                "value": "boost"
+              }
+            }
+          ],
+          "name": "action"
         }
       ]
     }
   },
-  "version": "29"
+  "version": "31"
 }

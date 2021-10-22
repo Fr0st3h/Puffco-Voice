@@ -86,19 +86,43 @@ async def handle_cmd():
         preheatBytes = bytearray([0, 0, 224, 64])
         await Device.sendCommand(preheatBytes)
         return "Starting preheat for profile {}. Heating to {} celsius for {} seconds".format(await Device.getProfileName(), await Device.getProfileTemp(), await Device.getProfileTime()), 200
+    elif(command== "boost"):
+        state = await Device.getState()
+        if(state == 8):
+            stopCycle = bytearray([0, 0, 16, 65])
+            await Device.sendCommand(stopCycle)
+            return f"Boosted puffco {await Device.getBoostTemp()} degrees and {await Device.getBoostTime()} seconds", 200
+        else:
+            return "Your puffco hasn't finished preheating", 400
+    elif(command== "stop"):
+        state = await Device.getState()
+        if(state == 7 or state == 8):
+            stopCycle = bytearray([0, 0, 0, 65])
+            await Device.sendCommand(stopCycle)
+            return "Stopped preheat cycle", 200
+        else:
+            return "You are not in a preheat cycle", 400
     return "Command not found", 200
 
 @app.route('/info', methods=['GET'])
 async def handle_info():
     length = request.args.get('length','')
-    if(length):
+    infoType = request.args.get('type','')
+    if(infoType == "dabs" or infoType == "dogs"):
         if(length == "total"):
             return f"Your total amount of dabs taken since {await Device.getBirthday()} is {await Device.getTotalDabsTaken()}", 200
         elif(length == "daily" or length == "day"):
             return f"Your daily dab amount is {await Device.getDailyDabsTaken()}", 200
         elif(length == "left" or length == "remaining"):
             return f"The approximate amount of dabs left before the battery dies is {await Device.getDabsLeft()}", 200
-    return "Issue when handling puffco info", 200
+        else:
+            return f"The length {length} was not found.", 400
+    elif(infoType == "battery"):
+        preheatBytes = bytearray([0, 0, 160, 64])
+        await Device.sendCommand(preheatBytes)
+        return f"Your puffco is at {await Device.getBatteryLevel()} percent", 200
+    else:
+        return f"The type {infoType} was not found.", 400
 
 @app.route('/preheat', methods=['GET'])
 async def handle_preheat():
@@ -119,7 +143,7 @@ async def index():
     try:
         await asyncio.wait_for(Device.connect(), timeout=7.5)
         clickButton = bytearray([0, 0, 64, 64])
-        await Device.sendCommand(clickButton)
+        #await Device.sendCommand(clickButton)
         return f"Connected to {await Device.getName()}", 200
     except asyncio.TimeoutError:
         return f"Failed to connect to puffco", 400

@@ -8,12 +8,17 @@ class Puffco():
     COMMAND = "F9A98C15-C651-4F34-B656-D100BF580040"
 
     DEVICE_NAME = "F9A98C15-C651-4F34-B656-D100BF58004D"
+    DEVICE_STATE = "F9A98C15-C651-4F34-B656-D100BF580022"
     DEVICE_BIRTHDAY = "F9A98C15-C651-4F34-B656-D100BF58004E"
+    DEVICE_BATTERY_CURRENT = "F9A98C15-C651-4F34-B656-D100BF580020"
 
     LANTERN_STATUS = "F9A98C15-C651-4F34-B656-D100BF58004A"
     LANTERN_COLOUR = "F9A98C15-C651-4F34-B656-D100BF580048"
 
     STEALTH_STATUS = "F9A98C15-C651-4F34-B656-D100BF580042"
+
+    BOOST_TEMP = "F9A98C15-C651-4F34-B656-D100BF580067"
+    BOOST_TIME = "F9A98C15-C651-4F34-B656-D100BF580068"
 
     TOTAL_DABS = "F9A98C15-C651-4F34-B656-D100BF58002F"
     DAILY_DABS = "F9A98C15-C651-4F34-B656-D100BF58003B"
@@ -60,7 +65,7 @@ class Puffco():
             profile = bytearray([2, 0, 0, 0])
         elif(prof == 3):
             profile = bytearray([3, 0, 0, 0])
-        await self.client.write_gatt_char(self.PROFILE, profile)
+        await self.client.write_gatt_char(self.PROFILE, profile, response=True)
         if(realProfileBytes):
             if(prof == 0):
                 profile = bytearray([0, 0, 0, 0])
@@ -70,20 +75,20 @@ class Puffco():
                 profile = bytearray([0, 0, 0, 64])
             elif(prof == 3):
                 profile = bytearray([0, 0, 64, 64])
-            await self.client.write_gatt_char(self.PROFILE_CURRENT, profile)
+            await self.client.write_gatt_char(self.PROFILE_CURRENT, profile, response=True)
 
     async def setProfileTime(self, seconds):
-        time = Utils.packInt(int(seconds))
+        time = Utils.packFloat(int(seconds))
         print(time)
-        await self.client.write_gatt_char(self.PROFILE_PREHEAT_TIME, time)
+        await self.client.write_gatt_char(self.PROFILE_PREHEAT_TIME, time, response=True)
 
     async def setProfileTemp(self, temp):
-        temperature = Utils.packInt(int(temp))
+        temperature = Utils.packFloat(int(temp))
         print(temperature)
-        await self.client.write_gatt_char(self.PROFILE_PREHEAT_TEMP, temperature)
+        await self.client.write_gatt_char(self.PROFILE_PREHEAT_TEMP, temperature, response=True)
 
     async def sendCommand(self, commandArray):
-        await self.client.write_gatt_char(self.COMMAND, commandArray)
+        await self.client.write_gatt_char(self.COMMAND, commandArray, response=True)
 
     async def getBirthday(self):
         birthday = await self.client.read_gatt_char(self.DEVICE_BIRTHDAY)
@@ -96,7 +101,7 @@ class Puffco():
             commandArray = bytearray([0, 0, 0, 0])
         elif(status == 1):
             commandArray = bytearray([1, 0, 0, 0])
-        await self.client.write_gatt_char(self.STEALTH_STATUS, commandArray)
+        await self.client.write_gatt_char(self.STEALTH_STATUS, commandArray, response=True)
 
     async def getTotalDabsTaken(self):
         totalDabs = await self.client.read_gatt_char(self.TOTAL_DABS)
@@ -129,7 +134,27 @@ class Puffco():
             commandArray = bytearray([0, 0, 0, 0])
         elif(status == 1):
             commandArray = bytearray([1, 0, 0, 0])
-        await self.client.write_gatt_char(self.LANTERN_STATUS, commandArray)
+        await self.client.write_gatt_char(self.LANTERN_STATUS, commandArray, response=True)
 
     async def sendLanternColour(self, colour):
-        await self.client.write_gatt_char(self.LANTERN_COLOUR, colour)
+        await self.client.write_gatt_char(self.LANTERN_COLOUR, colour, response=True)
+
+    async def getBatteryLevel(self):
+        battery = await self.client.read_gatt_char(self.DEVICE_BATTERY_CURRENT)
+        data = Utils.parseFloat(battery)
+        return str(round(data, 1))
+
+    async def getBoostTemp(self):
+        temp = await self.client.read_gatt_char(self.BOOST_TEMP)
+        data = Utils.parseFloat(temp)
+        return int(data)
+
+    async def getBoostTime(self):
+        time = await self.client.read_gatt_char(self.BOOST_TIME)
+        data = Utils.parseFloat(time)
+        return int(data)
+
+    async def getState(self):
+        time = await self.client.read_gatt_char(self.DEVICE_STATE)
+        data = Utils.parseFloat(time)
+        return int(data)
