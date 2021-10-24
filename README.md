@@ -45,6 +45,7 @@ Commands:
   12. Alexa, ask my puffco how much battery is left - This will tell you how much battery percent is left (and flash the battery level on the puffco)
   13. Alexa, tell my puffco to boost - This will boost if theres currently a cycle active
   14. Alexa, tell my puffco to cancel/stop preheat - This will stop a preheat cycle if active.
+  15. Alexa, tell my puffco to [enable/turn on] / [disable/turn off] ready mode - This will enable ready mode for cable charging
 
 
   
