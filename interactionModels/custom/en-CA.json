@@ -159,6 +159,11 @@
           "values": [
             {
               "name": {
+                "value": "ready"
+              }
+            },
+            {
+              "name": {
                 "value": "party"
               }
             },
@@ -258,5 +263,5 @@
       ]
     }
   },
-  "version": "28"
+  "version": "29"
 }

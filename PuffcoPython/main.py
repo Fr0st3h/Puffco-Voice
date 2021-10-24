@@ -3,14 +3,16 @@ from aioflask import Flask, render_template
 from flask import request
 import asyncio
 from matplotlib import colors
+import ready as Ready
+import threading
 
-mac = "PUFFCO MAC ADDRESS HERE"
+mac = "PUFFCO MAC HERE"
 
 loop = asyncio.get_event_loop()
 app = Flask(__name__)
 Device = Puffco(mac)
 
-modes = list(["lantern", "party", "stealth"])
+modes = list(["lantern", "party", "stealth", "ready"])
 statusList = list(["on", "enable", "off", "disable"])
 
 @app.route('/mode', methods=['GET'])
@@ -64,6 +66,16 @@ async def handle_mode():
         elif(status == "off"):
             await Device.sendStealthStatus(0)
             return "Stealth was turned off for {}".format(await Device.getName())
+    elif(mode == "ready"):
+        if(status == "on"):
+            Ready.readyMode = True
+            _thread = threading.Thread(target=Ready.runLoop, args=(Device,))
+            _thread.start()
+            return f"Ready mode was turned on for {await Device.getName()}", 200
+        elif(status == "off"):
+            Ready.readyMode = False
+            return f"Ready mode was turned off for {await Device.getName()}", 200
+        return "Something went wrong with ready mode.", 400
     if(not modeInList):
         return "The Mode " + mode + " was not found.", 400
     if(not statusInList):
@@ -143,7 +155,7 @@ async def index():
     try:
         await asyncio.wait_for(Device.connect(), timeout=7.5)
         clickButton = bytearray([0, 0, 64, 64])
-        #await Device.sendCommand(clickButton)
+        await Device.sendCommand(clickButton)
         return f"Connected to {await Device.getName()}", 200
     except asyncio.TimeoutError:
         return f"Failed to connect to puffco", 400

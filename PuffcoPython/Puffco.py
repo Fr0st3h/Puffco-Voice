@@ -8,6 +8,7 @@ class Puffco():
     COMMAND = "F9A98C15-C651-4F34-B656-D100BF580040"
 
     DEVICE_NAME = "F9A98C15-C651-4F34-B656-D100BF58004D"
+    DEVICE_CHARGE_STATE = "F9A98C15-C651-4F34-B656-D100BF580031"
     DEVICE_STATE = "F9A98C15-C651-4F34-B656-D100BF580022"
     DEVICE_BIRTHDAY = "F9A98C15-C651-4F34-B656-D100BF58004E"
     DEVICE_BATTERY_CURRENT = "F9A98C15-C651-4F34-B656-D100BF580020"
@@ -156,5 +157,10 @@ class Puffco():
 
     async def getState(self):
         time = await self.client.read_gatt_char(self.DEVICE_STATE)
+        data = Utils.parseFloat(time)
+        return int(data)
+
+    async def getChargeState(self):
+        time = await self.client.read_gatt_char(self.DEVICE_CHARGE_STATE)
         data = Utils.parseFloat(time)
         return int(data)
