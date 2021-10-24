@@ -26,9 +26,7 @@ Step 6:
   
  
 Whats new in 0.5:
- - battery level
- - boost
- - cancel preheat
+ - cable charging ready mode
   
 Commands:
   1. Alexa, tell my puffco to connect - This will connect to your puffco, only need to run it once.
