@@ -1,0 +1,90 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "A test puffco voice command skill",
+          "examplePhrases": [
+            "Alexa open test skill",
+            "preheat"
+          ],
+          "keywords": [
+            "puffco",
+            "voice"
+          ],
+          "name": "Puffco Voice",
+          "description": "A sample voice command skill for puffco",
+          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+        },
+        "en-CA": {
+          "summary": "A test puffco voice command skill",
+          "examplePhrases": [
+            "Alexa open test skill",
+            "preheat"
+          ],
+          "keywords": [
+            "puffco",
+            "voice"
+          ],
+          "name": "Puffco Voice",
+          "description": "A sample voice command skill for puffco",
+          "smallIconUri": "file://assets/images/en-CA_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-CA_largeIconUri.png"
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Sample Testing Instructions.",
+      "category": "SMART_HOME",
+      "distributionMode": "PUBLIC",
+      "automaticClonedLocale": {
+        "locales": [
+          {
+            "source": "en-US",
+            "targets": [
+              "en-CA"
+            ]
+          }
+        ]
+      },
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:us-east-1:325245910930:function:f9b3ea24-5c51-49c8-b377-7ec99e8fbf27:Release_0"
+        },
+        "interfaces": [],
+        "regions": {
+          "EU": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:eu-west-1:325245910930:function:f9b3ea24-5c51-49c8-b377-7ec99e8fbf27:Release_0"
+            }
+          },
+          "NA": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-east-1:325245910930:function:f9b3ea24-5c51-49c8-b377-7ec99e8fbf27:Release_0"
+            }
+          },
+          "FE": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-west-2:325245910930:function:f9b3ea24-5c51-49c8-b377-7ec99e8fbf27:Release_0"
+            }
+          }
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "locales": {
+        "en-US": {},
+        "en-CA": {}
+      },
+      "containsAds": false,
+      "isExportCompliant": true,
+      "isChildDirected": false,
+      "usesPersonalInfo": false
+    }
+  }
+}
